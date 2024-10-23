@@ -50,12 +50,13 @@ body {
 }
 
 .box {
-  width: 42rem;
-  max-width: 42rem;
+  /* min-width: 42rem; */
+  width: 45rem;
   background-color: var(--color-background-500);
   border-radius: 0.9rem;
-  overflow: scroll vertical;
+  overflow-y: scroll;
   position: relative;
+  transition: all 0.3s;
 }
 
 .loader {
@@ -138,7 +139,7 @@ body {
 .list {
   list-style: none;
   padding: 0.8rem 0;
-  overflow: scroll vertical;
+  /* overflow-y: scroll; */
 }
 
 .list-watched {
