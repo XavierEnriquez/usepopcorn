@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import StarRating from "./utils/StarRating";
 import WatchedMovieList from "./movies-watched/WatchedMovieList";
 import WatchedSummaryCard from "./movies-watched/WatchedSummaryCard";
 import MoviesList from "./movies/MoviesList";
@@ -9,6 +8,7 @@ import Search from "./navbar/Search";
 import NumResults from "./navbar/NumResults";
 import ErrorMessage from "./utils/ErrorMessage";
 import Loader from "./utils/Loader";
+import MovieDetails from "./movies/MovieDetails";
 import { KEY } from "./utils/KEY";
 
 // const tempMovieData = [
@@ -138,93 +138,8 @@ export default function App() {
             </>
           )}
         </ContentBlock>
-        {/* Same results as above but passing components explicilty */}
-        {/* <ContentBlock element={<MoviesList movies={movies} />} />
-
-        <ContentBlock
-          element={
-            <>
-              <WatchedSummaryCard watched={watched} />
-              <WatchedMovieList watched={watched} />
-            </>
-          }
-        /> */}
       </Main>
     </>
-  );
-}
-
-function MovieDetails({ selectedId, onCloseMovie }) {
-  const [movie, setMovie] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-
-  const {
-    Title: title,
-    Year: year,
-    Poster: poster,
-    Runtime: runtime,
-    imdbRating,
-    Plot: plot,
-    Released: released,
-    Actors: actors,
-    Director: director,
-    Genre: genre,
-  } = movie;
-
-  useEffect(
-    function () {
-      async function getMovieDetails() {
-        const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`
-        );
-
-        if (!res.ok) throw new Error("Something went wrong!");
-
-        const data = await res.json();
-        setMovie(data);
-      }
-
-      getMovieDetails();
-    },
-    [selectedId]
-  );
-
-  return (
-    <div className="details">
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <header>
-            <button className="btn-back" onClickCapture={onCloseMovie}>
-              &larr;
-            </button>
-            <img src={poster} alt={`${movie} movie poster`} />
-            <div className="details-overview">
-              {" "}
-              <h2>{title}</h2>{" "}
-              <p>
-                {released} &bull; {runtime}
-              </p>
-              <p>
-                <span>⭐</span>
-                {imdbRating} IMDb Rating
-              </p>
-            </div>
-          </header>
-          <section>
-            <div className="rating">
-              <StarRating maxRating={10} size={24} />
-            </div>
-            <p>
-              <em>{plot}</em>
-            </p>
-            <p>Starring {actors}</p>
-            <p>Directed {director}</p>
-          </section>
-        </>
-      )}
-    </div>
   );
 }
 

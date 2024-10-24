@@ -27,3 +27,19 @@ export default function ContentBlock({ children }) {
 //   );
 // }
 ////////////////////////
+
+{
+  /* Same results as above but passing components explicilty */
+}
+{
+  /* <ContentBlock element={<MoviesList movies={movies} />} />
+
+        <ContentBlock
+          element={
+            <>
+              <WatchedSummaryCard watched={watched} />
+              <WatchedMovieList watched={watched} />
+            </>
+          }
+        /> */
+}
