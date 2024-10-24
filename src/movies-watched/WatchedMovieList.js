@@ -1,4 +1,4 @@
-import WatchedMovieItem from "./utils/WatchedMovieItem";
+import WatchedMovieItem from "./WatchedMovieItem";
 
 export default function WatchedMovieList({ watched }) {
   return (

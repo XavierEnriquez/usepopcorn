@@ -1,4 +1,4 @@
-export function Search({ query, onSetQuery }) {
+export default function Search({ query, onSetQuery }) {
   return (
     <input
       className="search"

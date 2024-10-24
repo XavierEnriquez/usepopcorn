@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import StarRating from "./utils/StarRating";
-import WatchedMovieList from "./WatchedMovieList";
-import WatchedSummaryCard from "./WatchedSummaryCard";
-import MoviesList from "./MoviesList";
+import WatchedMovieList from "./movies-watched/WatchedMovieList";
+import WatchedSummaryCard from "./movies-watched/WatchedSummaryCard";
+import MoviesList from "./movies/MoviesList";
 import ContentBlock from "./utils/ContentBlock";
-import NavBar from "./NavBar";
+import NavBar from "./navbar/NavBar";
 import Search from "./navbar/Search";
 import NumResults from "./navbar/NumResults";
 import ErrorMessage from "./utils/ErrorMessage";

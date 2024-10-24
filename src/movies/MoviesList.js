@@ -1,4 +1,4 @@
-import { MovieItemCard } from "./utils/MovieItemCard";
+import MovieItemCard from "./MovieItemCard";
 
 export default function MoviesList({ movies, onSelectMovie }) {
   return (

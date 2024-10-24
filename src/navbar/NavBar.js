@@ -1,6 +1,6 @@
-import { Logo } from "./App";
+import { Logo } from "./Logo";
 
-export function NavBar({ children }) {
+export default function NavBar({ children }) {
   return (
     <nav className="nav-bar">
       <Logo />
