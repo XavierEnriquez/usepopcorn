@@ -5,7 +5,7 @@ import WatchedSummaryCard from "./movies-watched/WatchedSummaryCard";
 import MoviesList from "./movies/MoviesList";
 import ContentBlock from "./utils/ContentBlock";
 import NavBar from "./navbar/NavBar";
-import { Logo } from "./navbar/Logo";
+import Logo from "./navbar/Logo";
 import Search from "./navbar/Search";
 import NumResults from "./navbar/NumResults";
 import ErrorMessage from "./utils/ErrorMessage";
@@ -15,6 +15,19 @@ import { KEY } from "./utils/KEY";
 
 function Main({ children }) {
   return <main className="main">{children}</main>;
+}
+
+function SearchResultsBlock({ isLoading, error, movies, handleSelectMovie }) {
+  return (
+    <ContentBlock>
+      {/* Passing components implicitly with children props **preferd way in react** */}
+      {isLoading && <Loader />}
+      {!isLoading && !error && (
+        <MoviesList movies={movies} onSelectMovie={handleSelectMovie} />
+      )}
+      {error && <ErrorMessage message={error} />}
+    </ContentBlock>
+  );
 }
 
 export default function App() {
@@ -29,7 +42,7 @@ export default function App() {
     setSelectedId((selectedId) => (id === selectedId ? null : id));
   }
 
-  function handleCloseMovie(movieId) {
+  function handleCloseMovie() {
     setSelectedId(null);
   }
 
@@ -85,14 +98,13 @@ export default function App() {
         <NumResults movies={movies} />
       </NavBar>
       <Main>
-        {/* Passing components implicitly with children props **preferd way in react** */}
-        <ContentBlock>
-          {isLoading && <Loader />}
-          {!isLoading && !error && (
-            <MoviesList movies={movies} onSelectMovie={handleSelectMovie} />
-          )}
-          {error && <ErrorMessage message={error} />}
-        </ContentBlock>
+        <SearchResultsBlock
+          isLoading={isLoading}
+          error={error}
+          movies={movies}
+          handleSelectMovie={handleSelectMovie}
+        />
+
         <ContentBlock>
           {selectedId ? (
             <MovieDetails
@@ -103,12 +115,11 @@ export default function App() {
             />
           ) : (
             <>
-              {" "}
               <WatchedSummaryCard watched={watched} />
               <WatchedMovieList
                 watched={watched}
                 onDeleteWatched={handleDeleteWatched}
-              />{" "}
+              />
             </>
           )}
         </ContentBlock>
