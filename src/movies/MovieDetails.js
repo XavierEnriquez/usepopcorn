@@ -71,7 +71,24 @@ export default function MovieDetails({
 
       getMovieDetails();
     },
+    // this useEffect monitors for any selectedId change, it then runs the function in it.
     [selectedId]
+  );
+
+  useEffect(
+    function () {
+      if (!title) return;
+
+      // this useEffect function dynamically changes the page title
+      document.title = ` ${title} | usePopcorn`;
+
+      // we use a clean-up function to return to the original state
+      return function () {
+        document.title = "usePopcorn";
+      };
+    },
+    // this useEffect monitors for any title change, it then runs the function in it.
+    [title]
   );
 
   return (
