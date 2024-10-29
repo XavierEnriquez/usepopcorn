@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useFetchMovies } from "./hooks.js/useFetchMovies";
 
@@ -11,6 +11,7 @@ import Search from "./navbar/Search";
 import NumResults from "./navbar/NumResults";
 import MovieDetails from "./movies/MovieDetails";
 import SearchResultsBlock from "./movies/SearchResultsBlock";
+import { useLocalStorageState } from "./hooks.js/useLocalStorageState";
 
 function Main({ children }) {
   return <main className="main">{children}</main>;
@@ -20,11 +21,8 @@ function Main({ children }) {
 export default function App() {
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-  const [watched, setWatched] = useState(function () {
-    const storedMovies = localStorage.getItem("watched");
-    return JSON.parse(storedMovies);
-  });
   const { movies, isLoading, error } = useFetchMovies(query);
+  const [watched, setWatched] = useLocalStorageState([], "watched");
 
   function handleSelectMovie(id) {
     setSelectedId((selectedId) => (id === selectedId ? null : id));
@@ -41,13 +39,6 @@ export default function App() {
   function handleDeleteWatched(id) {
     setWatched((watched) => watched.filter((movie) => movie.imbdID !== id));
   }
-
-  useEffect(
-    function () {
-      localStorage.setItem("watched", JSON.stringify(watched));
-    },
-    [watched]
-  );
 
   return (
     <>
