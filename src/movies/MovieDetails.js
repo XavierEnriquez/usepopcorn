@@ -3,6 +3,7 @@ import { KEY } from "../utils/KEY";
 import Loader from "../utils/Loader";
 import StarRating from "../utils/StarRating";
 import ErrorMessage from "../utils/ErrorMessage";
+import { useKeydown } from "../hooks.js/useKeydown";
 
 export default function MovieDetails({
   selectedId,
@@ -47,6 +48,8 @@ export default function MovieDetails({
     onCloseMovie();
   }
 
+  useKeydown("Escape", onCloseMovie);
+
   useEffect(
     function () {
       async function getMovieDetails() {
@@ -89,23 +92,6 @@ export default function MovieDetails({
     },
     // this useEffect monitors for any title change, it then runs the function in it.
     [title]
-  );
-
-  useEffect(
-    function () {
-      function callback(e) {
-        if (e.code === "Escape") {
-          onCloseMovie();
-        }
-      }
-
-      document.addEventListener("keydown", callback);
-
-      return function () {
-        document.removeEventListener("keydown", callback);
-      };
-    },
-    [onCloseMovie]
   );
 
   return (
