@@ -8,7 +8,7 @@ export default function WatchedSummaryCard({ watched }) {
 
   return (
     <div className="summary">
-      <h2>Movies you watched</h2>
+      <h2>Your watched movies stats</h2>
       <div>
         <p>
           <span>#️⃣</span>
