@@ -1,10 +1,12 @@
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0).toFixed(2);
+const minWatched = (arr) =>
+  arr.reduce((acc, cur, i, arr) => acc + cur, 0).toFixed(2);
 
 export default function WatchedSummaryCard({ watched }) {
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
-  const avgRuntime = average(watched.map((movie) => movie.runtime));
+  const minutesWatched = minWatched(watched.map((movie) => movie.runtime));
 
   return (
     <div className="summary">
@@ -24,7 +26,7 @@ export default function WatchedSummaryCard({ watched }) {
         </p>
         <p>
           <span>⏳</span>
-          <span>{avgRuntime} min</span>
+          <span>{minutesWatched} min</span>
         </p>
       </div>
     </div>
